@@ -25,8 +25,10 @@ SECRET_KEY = 'django-insecure-@ywg!k4t^kxq10nwkoqpppc_v&(i!h=7+!j8r9)e@7hv+8be=o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# For testing
+CSRF_TRUSTED_ORIGINS = ["https://*.ngrok.io"]
 
 # Application definition
 
@@ -75,9 +77,20 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'CONN_MAX_AGE' : None,
+        'NAME': 'meta4FSW5littlelemon',
+        'USER': 'meta4FSW3',
+        'PASSWORD': 'phone_8675309',
+        'HOST': 'VM-DB-SERVER.local',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    },
+    'django_default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
 }
 
 
