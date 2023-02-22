@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@ywg!k4t^kxq10nwkoqpppc_v&(i!h=7+!j8r9)e@7hv+8be=o'
+SECRET_KEY = 'django-insecure-$jhl7$ha$h@2l67phapw6fsb30tn#rc9p_gnul2l9-h9hu75z^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 # For testing
 CSRF_TRUSTED_ORIGINS = ["https://*.ngrok.io"]
+
 
 # Application definition
 
@@ -39,10 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_filters',
     'rest_framework',
-    'rest_framework.authtoken',
-    'djoser',
     'restaurant',
 ]
 
@@ -84,18 +82,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'CONN_MAX_AGE' : None,
-        'NAME': 'meta4BED4littlelemon',
-        'USER': 'meta4BED',
-        'PASSWORD': 'phone_8675309',
-        'HOST': 'VM-DB-SERVER.local',
         'OPTIONS': {
+            'read_default_file': str(BASE_DIR / 'my.cnf'),
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     },
     'django_default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
+    }
 }
 
 
@@ -118,41 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-        'rest_framework_xml.renderers.XMLRenderer',
-    ],
-    'DEFAULT_FILTER_BACKENDS': [
-        'rest_framework.filters.OrderingFilter',
-        'rest_framework.filters.SearchFilter',
-        'django_filters.rest_framework.DjangoFilterBackend',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ],
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle',
-        'rest_framework.throttling.ScopedRateThrottle',
-    ],
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '100/second',
-        'user': '1000/second',
-    },
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 300,
-}
-
-
-#add the following line
-DJOSER = {
-    "USER_ID_FIELD": "username"
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -168,10 +128,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'templates/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    "restaurant/templates/static",
+    "restaurant/static",
 ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

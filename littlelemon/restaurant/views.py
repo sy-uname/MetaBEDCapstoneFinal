@@ -1,52 +1,34 @@
 from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+from restaurant.models import Menu, Booking
+from restaurant.serializers import MenuSerializer, BookingSerializer
 
 # Create your views here.
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from rest_framework import generics, viewsets, status, pagination
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from restaurant.auth import IsBaseAuthenticated
-from restaurant.models import Booking, Menu
-from restaurant.serializers import MenuSerializer, BookingSerializer, UserSerializer
+class _LC:
+    TMPLT_INDEX = 'restaurant/index.html'
 
 
 def index(request):
-    return render(request, 'index.html', {})
-
-
-class UserViewSet(viewsets.ModelViewSet):
-   queryset = User.objects.all()
-   serializer_class = UserSerializer
-   permission_classes = [IsBaseAuthenticated]
+    return render(
+        request,
+        _LC.TMPLT_INDEX,
+        dict(),
+    )
 
 
 class MenuItemsView(generics.ListCreateAPIView):
-    queryset = Menu.objects.all().order_by('title')
-    permission_classes = [IsBaseAuthenticated]
+    queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    ordering_fields = [
-        'title',
-        'price',
-        'inventory',
-    ]
-    filterset_fields = [
-        'price',
-        'title',
-    ]
-    search_fields = [
-        'price',
-        'title',
-        'inventory',
-    ]
 
 
 class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
-    permission_classes = [IsBaseAuthenticated]
     serializer_class = MenuSerializer
 
 
-class BookingViewSet(viewsets.ModelViewSet):
+class BookingViewSet(ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]

@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.core.validators import MinValueValidator
 from datetime import date
@@ -20,11 +21,6 @@ class Booking(models.Model):
         help_text = "Booking date",
     )
 
-    # class Meta:
-    #     unique_together = (
-    #         'reservation_date',
-    #         'reservation_slot',
-    #     )
 
     def __str__(self):
         return f'{self.name}({self.booking_date})'

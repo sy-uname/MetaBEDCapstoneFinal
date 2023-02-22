@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import RedirectView
+from rest_framework.routers import DefaultRouter
+from restaurant.views import BookingViewSet
+
+router = DefaultRouter(trailing_slash = True)
+router.register(r'tables', BookingViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
-    path('', include('restaurant.urls')),
+    path('', RedirectView.as_view(url = 'restaurant/', permanent = False), name = 'redirect'),
     path('restaurant/', include('restaurant.urls')),
+    path('restaurant/menu/', include('restaurant.urls', namespace='menuitems')),
+    path('restaurant/booking/', include(router.urls)),
+    path('admin/', admin.site.urls),
 ]
