@@ -28,4 +28,6 @@ urlpatterns = [
     path('restaurant/menu/', include('restaurant.urls', namespace='menuitems')),
     path('restaurant/booking/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken'))
 ]

@@ -1,4 +1,5 @@
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
 from . import views
 
 app_name = 'restaurant'
@@ -13,4 +14,5 @@ menuitems_patterns = (
 urlpatterns = [
     path('', views.index, name='index'),
     path('items/', include(menuitems_patterns)),
+    path('api-token-auth/', obtain_auth_token)
 ]
