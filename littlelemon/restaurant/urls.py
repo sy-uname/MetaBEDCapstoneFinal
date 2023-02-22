@@ -6,7 +6,7 @@ app_name = 'restaurant'
 
 menuitems_patterns = (
     [
-        path('', views.MenuItemsView.as_view()),
+        path('', views.MenuItemsView.as_view(), name = 'memu_items_list'),
         path('<int:pk>', views.SingleMenuItemView.as_view()),
     ], 'menuitems'
 )

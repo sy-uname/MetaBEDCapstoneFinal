@@ -88,6 +88,9 @@ DATABASES = {
             'read_default_file': str(BASE_DIR / 'my.cnf'),
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
+        'TEST': {
+            'NAME': 'meta4BED4littlelemonTest'
+        }
     },
     'django_default': {
         'ENGINE': 'django.db.backends.sqlite3',
