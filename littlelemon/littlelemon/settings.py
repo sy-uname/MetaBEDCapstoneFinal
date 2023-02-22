@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@ywg!k4t^kxq10nwkoqpppc_v&(i!h=7+!j8r9)e@7hv+8be=o'
+SECRET_KEY = 'django-insecure-$jhl7$ha$h@2l67phapw6fsb30tn#rc9p_gnul2l9-h9hu75z^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 # For testing
 CSRF_TRUSTED_ORIGINS = ["https://*.ngrok.io"]
+
 
 # Application definition
 
@@ -39,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'restaurant',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +61,7 @@ ROOT_URLCONF = 'littlelemon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,18 +84,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'CONN_MAX_AGE' : None,
-        'NAME': 'meta4FSW5littlelemon',
-        'USER': 'meta4FSW3',
-        'PASSWORD': 'phone_8675309',
-        'HOST': 'VM-DB-SERVER.local',
         'OPTIONS': {
+            'read_default_file': str(BASE_DIR / 'my.cnf'),
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
+        'TEST': {
+            'NAME': 'meta4BED4littlelemonTest'
+        }
     },
     'django_default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
+    }
 }
 
 
@@ -129,8 +134,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    "restaurant/static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+
+DJOSER={"USER_ID_FIELD":"username"}
