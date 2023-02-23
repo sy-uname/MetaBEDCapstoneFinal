@@ -14,8 +14,8 @@
 
 ## DB my.cfg
 [client]
-* database = <DATABASE_NAME>
-* user = <DB_USER_NAME>
+  database = <DATABASE_NAME>
+  user = <DB_USER_NAME>
 * password = <DB_USER_PASSWORD>
 * host = <IP_OR_HOSTNAME>
 * port = <PORT>
