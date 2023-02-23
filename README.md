@@ -23,6 +23,23 @@
 * port = <PORT>
 
 ## DB settings.py 
-* DATABASES 
-* 	'TEST' := the test database name
-* do not forget to add permissions to the test base for <DB_USER_NAME>
+  DATABASES 
+    'TEST' := the test database name
+  do not forget to add permissions to the test base for <DB_USER_NAME>
+
+## After download
+prepare the virtual environment and install all dependencies using the following commands.
+
+```bash
+cd <project directory>
+
+pipenv shell
+
+pipenv install 
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py runserver
+```
